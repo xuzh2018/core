@@ -1,33 +1,131 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
+apply from: 'versions.gradle'
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion build_versions.target_sdk
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 28
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
+    }
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+    androidExtensions {
+        experimental = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
         release {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            zipAlignEnabled false
+            shrinkResources false
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    api deps.support.v4
+    api deps.support.core_utils
+    api deps.support.annotations
+    api deps.support.app_compat
+    api deps.support.recyclerview
+    api deps.support.cardview
+    api deps.support.design
+    api deps.support.palette
+
+    /**
+     * RxJava and retrofit
+     */
+    api deps.retrofit.gson
+    api deps.retrofit.okhttp_logging_interceptor
+    api deps.retrofit.runtime
+    api deps.retrofit.persistent_cookie
+//    api deps.retrofit.adapter
+//    api deps.rx_android
+//    api deps.rxjava2
+//    api deps.retrofit.scalars
+
+    /**
+     * Dagger
+     */
+    api deps.dagger.runtime
+    api deps.dagger.android
+    api deps.dagger.android_support
+
+    /**
+     * butterknife
+     */
+//    api deps.butterknife.compile
+
+    /**
+     * leakcanary
+     */
+    api deps.leakcanary.leakcanary_debug
+    api deps.leakcanary.leakcanary_support_fragment
+
+    /**
+     * lifecycle
+     */
+    api deps.lifecycle.extensions
+    api deps.lifecycle.java8
+    api deps.lifecycle.reactivestreams
+
+    //exoplayer
+//    api deps.exoplayer.exo_base
+
+    /**
+     * kotlin
+     */
+    api deps.kotlins.jdk
+    api deps.kotlins.core
+    api deps.kotlins.coroutines_core
+    api deps.kotlins.coroutines_android
+    api deps.kotlins.coroutines_adapter
+
+    /**
+     * others
+     */
+    api deps.permission
+    api deps.glide
+    api deps.material_dialog
+    api deps.logger
+    api deps.adapter
+    api deps.refreshview.layout
+    api deps.refreshview.headview
+    api deps.gson
+
+//    api deps.event_bus
+//    api deps.agentweb
+//
+//    implementation deps.toasty
+//
+//    //router
+//    api deps.arouter_api
+
+
+    /**
+     * annotationProcessor use with kapt
+     */
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+//    annotationProcessor deps.arouter_compiler
+//    annotationProcessor deps.butterknife.test_compile
 }
