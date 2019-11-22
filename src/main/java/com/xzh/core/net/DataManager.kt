@@ -12,12 +12,12 @@ data class InFlightRequestData(val key: String, val page: Int)
  *  created by xzh on 2019/6/27
  */
 abstract class DataManager<T> constructor(
-    private val dispatcherProvider: CoroutinesDiapatcherProvider
+    dispatcherProvider: CoroutinesDiapatcherProvider
 ) : DataLoadingObserver {
 
 
     override fun addDataLoadingObserver(callbacks: DataLoadingObserver.DataLoadingCallbacks) {
-
+        loadingCallBacks.add(callbacks)
     }
 
     private val parentJob = SupervisorJob()
@@ -42,9 +42,9 @@ abstract class DataManager<T> constructor(
     /**
      * 数据加载结束 数据回调
      */
-    private fun onDataLoaded(data: T) {
+    private fun onDataLoaded(data: T, item: InFlightRequestData) {
         Logger.i("数据回调$data")
-        onDataLoadedCallBack?.onDataLoaded(data)
+        onDataLoadedCallBack?.onDataLoaded(data, item)
     }
 
 
@@ -68,7 +68,7 @@ abstract class DataManager<T> constructor(
     ) {
         Logger.i("数据加载成功$request")
         if (data != null) {
-            onDataLoaded(data)
+            onDataLoaded(data, request)
         }
 
         loadFinished()
@@ -122,10 +122,10 @@ abstract class DataManager<T> constructor(
     }
 
     private fun dispatchLoadingFinishedCallBack() {
-        loadingCallBacks.forEach { it.startLoading() }
+        loadingCallBacks.forEach { it.finishLoading() }
     }
 
     private fun dispatchLoadingStartedCallBack() {
-        loadingCallBacks.forEach { it.finishLoading() }
+        loadingCallBacks.forEach { it.startLoading() }
     }
 }

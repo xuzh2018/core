@@ -17,7 +17,9 @@ android {
 //            }
 //        }
     }
-
+    kapt {
+        correctErrorTypes = true
+    }
     androidExtensions {
         experimental = true
     }
@@ -26,16 +28,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildTypes {
-        release {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-            zipAlignEnabled false
-            shrinkResources false
-            minifyEnabled false
-            debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
 
 }
 
@@ -71,6 +63,13 @@ dependencies {
     api deps.dagger.android_support
 
     /**
+     * airbnb
+     */
+    api deps.airbnb.lottie
+    api deps.airbnb.mvrx
+    api deps.airbnb.epoxy
+
+    /**
      * butterknife
      */
 //    api deps.butterknife.compile
@@ -87,9 +86,22 @@ dependencies {
     api deps.lifecycle.extensions
     api deps.lifecycle.java8
     api deps.lifecycle.reactivestreams
+    api deps.lifecycle.viewmodelktx
 
-    //exoplayer
-//    api deps.exoplayer.exo_base
+
+    /**
+     * Phoenix
+     */
+    api deps.phoenix.base
+    api deps.phoenix.photo
+    api deps.phoenix.video
+
+    /**
+     * player
+     */
+    api deps.exoplayer.exo_base
+    api deps.gsyplayer.java
+    api deps.gsyplayer.exo
 
     /**
      * kotlin
@@ -103,17 +115,23 @@ dependencies {
     /**
      * others
      */
+    api deps.autosize
     api deps.permission
     api deps.glide
+    api deps.glide_recycle
+    api deps.gif
     api deps.material_dialog
+    api deps.material_dialog_bottom
+    api deps.material_dialog_lifecycle
     api deps.logger
     api deps.adapter
     api deps.refreshview.layout
     api deps.refreshview.headview
     api deps.gson
+    api deps.constraintlayout
 
 //    api deps.event_bus
-//    api deps.agentweb
+    api deps.agentweb
 //
 //    implementation deps.toasty
 //
@@ -126,6 +144,7 @@ dependencies {
      */
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
+    kapt deps.airbnb.epoxy_test_compile
 //    annotationProcessor deps.arouter_compiler
-//    annotationProcessor deps.butterknife.test_compile
+//    kapt deps.butterknife.test_compile
 }

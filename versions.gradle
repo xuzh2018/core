@@ -5,41 +5,49 @@
 ext.deps = [:]
 
 def versions = [:]
+versions.android_gradle_plugin = "3.2.0"
+versions.constraintlayout = "1.1.3"
+versions.dagger = "2.16"
+versions.junit = "4.12"
 versions.kotlin_retro_coroutines_version = "0.9.2"
 versions.kotlin_coroutines_version = "1.1.1"
-versions.kotlin_version = "1.3.31"
+versions.kotlin_version = "1.3.41"
 versions.kotlin = "1.0.2"
-versions.android_gradle_plugin = "3.2.0"
-versions.dagger = "2.16"
+versions.lifecycle = "2.2.0-alpha03"
 versions.support = "1.0.0"
-versions.junit = "4.12"
-versions.lifecycle = "2.0.0"
 versions.share_sdk = "2018.0319.1724"
 
 
-versions.lottie = "2.7.0"
-versions.exoplayer = "2.9.6"
-versions.gvr = "1.190.0"
-versions.leakcanary = "1.6.3"
+versions.airbnb_mvrx = "1.0.0"
+versions.airbnb_lottie = "3.0.1"
+versions.airbnb_epoxy = "3.7.0"
+versions.autosize = "1.1.2"
+versions.adapter = "2.9.45"
+versions.agentweb = "4.0.3-alpha@aar"
 versions.butterknife = "10.0.0"
-versions.object_box = "2.3.4"
+versions.event_bus = "3.1.1"
+versions.exoplayer = "2.10.4"
+versions.gsyplayer = "7.1.0"
 versions.glide = "4.8.0"
+versions.gson = "2.8.5"
+versions.gif = "1.2.17"
+versions.gvr = "1.190.0"
+versions.lottie = "2.7.0"
+versions.logger = "1.15"
+versions.leakcanary = "1.6.3"
+versions.material_dialog = "3.1.0"
+versions.object_box = "2.3.4"
+versions.okhttp_logging_interceptor = "3.9.0"
+versions.photoview = "2.3.0"
+versions.permission = "1.1.2"
+versions.persistent_cookie = "v1.0.1"
+versions.phoenix = "1.0.15"
 versions.rxjava2 = "2.1.3"
 versions.rx_android = "2.0.1"
 versions.retrofit = "2.3.0"
-versions.event_bus = "3.1.1"
-versions.gson = "2.8.5"
-versions.persistent_cookie = "v1.0.1"
-versions.permission = "1.1.2"
-versions.material_dialog = "0.9.6.0"
-versions.smartrefreshlayout = "1.0.5"
-versions.adapter = "2.9.45"
-versions.photoview = "2.3.0"
-versions.toasty = "1.1.3"
-versions.logger = "1.15"
 versions.sonic = "3.1.0"
-versions.agentweb = "4.0.3-alpha@aar"
-versions.okhttp_logging_interceptor = "3.9.0"
+versions.smartrefreshlayout = "1.0.5"
+versions.toasty = "1.1.3"
 
 //Arouter
 versions.arouter_api = "1.4.1"
@@ -53,7 +61,7 @@ support.app_compat = "androidx.appcompat:appcompat:$versions.support"
 support.palette = "androidx.palette:palette:$versions.support"
 support.recyclerview = "androidx.recyclerview:recyclerview:$versions.support"
 support.cardview = "androidx.cardview:cardview:$versions.support"
-support.design = "com.google.android.material:material:$versions.support"
+support.design = "com.google.android.material:material:1.1.0-alpha09"
 support.v4 = "androidx.legacy:legacy-support-v4:$versions.support"
 support.core_utils = "androidx.legacy:legacy-support-core-utils:$versions.support"
 deps.support = support
@@ -64,6 +72,7 @@ lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecy
 lifecycle.java8 = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
 lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 lifecycle.reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams:$versions.lifecycle"
+lifecycle.viewmodelktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 deps.lifecycle = lifecycle
 
 def retrofit = [:]
@@ -89,6 +98,13 @@ butterknife.compile = "com.jakewharton:butterknife:$versions.butterknife"
 butterknife.test_compile = "com.jakewharton:butterknife-compiler:$versions.butterknife"
 deps.butterknife = butterknife
 
+
+def phoenix = [:]
+phoenix.base = "com.github.guoxiaoxing:phoenix:$versions.phoenix"
+phoenix.photo = "com.github.guoxiaoxing:phoenix-compress-picture:$versions.phoenix"
+phoenix.video = "com.github.guoxiaoxing:phoenix-compress-video:$versions.phoenix"
+deps.phoenix = phoenix
+
 def exoplayer = [:]
 exoplayer.exo_base = "com.google.android.exoplayer:exoplayer:$versions.exoplayer"
 exoplayer.exo_vr = "com.google.vr:sdk-base:$versions.gvr"
@@ -96,10 +112,25 @@ exoplayer.vr_base = "com.google.vr:sdk-base:$versions.gvr"
 exoplayer.vr_audio = "com.google.vr:sdk-audio:$versions.gvr"
 deps.exoplayer = exoplayer
 
+
+def gsyplayer = [:]
+gsyplayer.java = "com.shuyu:gsyVideoPlayer-java:$versions.gsyplayer"
+gsyplayer.exo = "com.shuyu:GSYVideoPlayer-exo2:$versions.gsyplayer"
+deps.gsyplayer = gsyplayer
+
+
 def refreshview = [:]
 refreshview.layout = "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartrefreshlayout"
 refreshview.headview = "com.scwang.smartrefresh:SmartRefreshHeader:$versions.smartrefreshlayout"
 deps.refreshview = refreshview
+
+
+def airbnb = [:]
+airbnb.lottie = "com.airbnb.android:lottie:$versions.airbnb_lottie"
+airbnb.mvrx = "com.airbnb.android:mvrx:$versions.airbnb_mvrx"
+airbnb.epoxy = "com.airbnb.android:epoxy:$versions.airbnb_epoxy"
+airbnb.epoxy_test_compile = "com.airbnb.android:epoxy-processor:$versions.airbnb_epoxy"
+deps.airbnb = airbnb
 
 def leakcanary = [:]
 leakcanary.leakcanary_debug = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
@@ -130,11 +161,16 @@ deps.gson = "com.google.code.gson:gson:$versions.gson"
 
 //view
 deps.material_dialog = "com.afollestad.material-dialogs:core:$versions.material_dialog"
+deps.material_dialog_bottom = "com.afollestad.material-dialogs:bottomsheets:$versions.material_dialog"
+deps.material_dialog_lifecycle = "com.afollestad.material-dialogs:lifecycle:$versions.material_dialog"
 deps.adapter = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.adapter"
+deps.gif = "pl.droidsonroids.gif:android-gif-drawable:$versions.gif"
 
 
 //other
+deps.autosize = "me.jessyan:autosize:$versions.autosize"
 deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+deps.glide_recycle = "com.github.bumptech.glide:recyclerview-integration:$versions.glide"
 deps.share_sdk = "com.mob.sdk:MobSDK:$versions.share_sdk"
 deps.photoview = "com.github.chrisbanes:PhotoView:$versions.glide"
 deps.event_bus = "org.greenrobot:eventbus:$versions.event_bus"
@@ -145,6 +181,7 @@ deps.toasty = "com.github.GrenderG:Toasty:$versions.toasty"
 deps.logger = "com.orhanobut:logger:$versions.logger"
 deps.sonic = "com.tencent.sonic:sdk:$versions.sonic"
 deps.agentweb = "com.just.agentweb:agentweb:$versions.agentweb"
+deps.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 
 ext.deps = deps
 

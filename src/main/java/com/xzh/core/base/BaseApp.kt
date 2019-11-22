@@ -9,18 +9,14 @@ import com.xzh.core.net.DaggerCoreDataComponent
 /**
  *  created by xzh on 2019/6/27
  */
-class BaseApp : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-    }
+open class BaseApp : Application() {
 
     private val coreDataComponent: CoreDataComponent by lazy { DaggerCoreDataComponent.create() }
 
     companion object {
         @JvmStatic
         fun coreDataComponent(context: Context): CoreDataComponent {
-            return (context as BaseApp).coreDataComponent
+            return (context.applicationContext as BaseApp).coreDataComponent
         }
     }
 }

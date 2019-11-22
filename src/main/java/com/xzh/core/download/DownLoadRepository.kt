@@ -1,11 +1,9 @@
 package com.xzh.core.download
 
-import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.xzh.core.net.ApiResult
 import com.xzh.core.net.safeApiCall
 import okhttp3.MultipartBody
-import okhttp3.ResponseBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -14,22 +12,18 @@ import java.io.InputStream
 /**
  *  created by xzh on 2019/6/27
  */
-class DownLoadRepository constructor(
-    private val downLoadApi: DownLoadApi,
-    private val listener: DownLoadModule.PerSyncInterceptorListener,
-    var _syncLiveData: MutableLiveData<DownLoadSource> = MutableLiveData()
+class DownLoadRepository(
+    private val downLoadApi: DownLoadApi
 ) {
-    init {
-        with(listener) { setSyncCurrentSource(_syncLiveData) }
 
-    }
 
-    val _listener: DownLoadModule.PerSyncInterceptorListener
-        get() = listener
+
 
     val localLength: Long
         get() = _localLength
+
     private var _localLength: Long = 0L
+
     suspend fun downLoad(start: String, url: String, path: String) = safeApiCall(
         call = { startDownLoad(start, url, path) },
         errorMessage = "download error"
@@ -84,7 +78,6 @@ class DownLoadRepository constructor(
             while ((inputStream?.read(b).also { len = it!! }) != -1) {
                 out.write(b, 0, len)
                 _localLength += len
-
             }
             inputStream?.close()
             out.close()
@@ -99,11 +92,10 @@ class DownLoadRepository constructor(
         private var INSTANCE: DownLoadRepository? = null
 
         fun instance(
-            downLoadApi: DownLoadApi,
-            listener: DownLoadModule.PerSyncInterceptorListener
+            downLoadApi: DownLoadApi
         ): DownLoadRepository {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: DownLoadRepository(downLoadApi, listener).also { INSTANCE = it }
+                INSTANCE ?: DownLoadRepository(downLoadApi).also { INSTANCE = it }
             }
         }
     }

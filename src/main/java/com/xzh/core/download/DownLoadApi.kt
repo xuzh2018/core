@@ -1,6 +1,5 @@
 package com.xzh.core.download
 
-import com.xzh.core.net.ApiResult
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody

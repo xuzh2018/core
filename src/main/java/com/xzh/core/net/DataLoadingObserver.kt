@@ -10,7 +10,7 @@ interface DataLoadingObserver {
         fun finishLoading()
     }
 
-    interface OnDataLoadedCallback<T> {
-        fun onDataLoaded(data: T)
+    interface OnDataLoadedCallback<in T> {
+        fun onDataLoaded(data: T, item: InFlightRequestData)
     }
 }

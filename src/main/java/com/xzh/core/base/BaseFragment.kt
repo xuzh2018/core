@@ -6,42 +6,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.airbnb.mvrx.BaseMvRxFragment
 
 /**
  *  created by xzh on 2019/6/19
  */
-abstract class BaseFragment :Fragment(){
+abstract class BaseFragment : Fragment() {
 
-    private var dataLoaded = false
-    private var viewPrepared = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inject()
         return inflater.inflate(initLayout(),container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPrepared = true
         initView()
-        lazyLoadIfPrepared()
     }
 
     @LayoutRes
     abstract fun initLayout(): Int
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser){
-            lazyLoadIfPrepared()
-        }
-    }
 
-    private fun lazyLoadIfPrepared() {
-        if (userVisibleHint && !dataLoaded && viewPrepared){
-            lazyLoad()
-        }
-    }
 
-    abstract fun lazyLoad()
+
+
+    abstract fun inject()
     abstract fun initView()
 
 }

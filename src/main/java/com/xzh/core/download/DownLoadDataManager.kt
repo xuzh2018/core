@@ -30,7 +30,7 @@ class DownLoadDataManager @Inject constructor(
     }
 
     fun startUpLoad(path: String, multipartBody: MultipartBody) {
-        Logger.i("开始下载............")
+        Logger.i("开始上传............")
         loadSource(
             UpLoadItem(
                 "http://sd.iqilu.com/paike/publish",
@@ -40,8 +40,7 @@ class DownLoadDataManager @Inject constructor(
     }
 
 
-    val syncListener: SyncInterceptorListener
-        get() = downLoadRepository._listener
+
 
     fun stopDownLoad() {
         Logger.i("暂停下载............")
@@ -49,6 +48,9 @@ class DownLoadDataManager @Inject constructor(
 //        cancleLoading()
     }
 
+    /**
+     *选择所需网络请求
+     */
     override fun startLoadingSource(item: BaseItem) {
         val data = InFlightRequestData(item.REQUEST_KEY, 0)
         when (item.REQUEST_KEY) {

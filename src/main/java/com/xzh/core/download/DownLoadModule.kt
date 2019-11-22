@@ -34,8 +34,8 @@ class DownLoadModule {
 
     @Provides
     @FeatureScope
-    fun provideDownLoadRepository(downLoadApi: DownLoadApi, listener: PerSyncInterceptorListener): DownLoadRepository =
-        DownLoadRepository.instance(downLoadApi, listener)
+    fun provideDownLoadRepository(downLoadApi: DownLoadApi): DownLoadRepository =
+        DownLoadRepository.instance(downLoadApi)
 
     @Provides
     @FeatureScope

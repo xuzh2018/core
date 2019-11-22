@@ -18,7 +18,5 @@ interface DownLoadComponent : BaseServiceComponent<DownLoadService> {
     interface Builder {
         fun build(): DownLoadComponent
         fun coreDataComponent(coreDataComponent: CoreDataComponent): Builder
-
-
     }
 }
